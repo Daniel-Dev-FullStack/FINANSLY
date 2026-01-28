@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- META TAGS -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Um gerenciador de orçamento mensal para ajudar você a controlar seus gastos e economizar dinheiro."
+    />
+
+    <!-- TITULO -->
+    <title>FINANSLY</title>
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <!-- SEÇÃO PRINCIPAL -->
+    <div class="app">
+      <!-- MENU LATERAL -->
+      <aside class="sidebar">
+        <div class="logo">FINANSLY</div>
+        <nav>
+          <button class="menu-item selecionada" data-pagina="dashboard">
+            <i class="fas fa-home"></i> Dashboard
+          </button>
+          <button class="menu-item" data-pagina="transacoes">
+            <i class="fas fa-exchange-alt"></i> Transações
+          </button>
+          <button class="menu-item" data-pagina="configuracoes">
+            <i class="fas fa-cog"></i> Configurações
+          </button>
+        </nav>
+      </aside>
+
+      <!-- CONTEÚDO PRINCIPAL -->
+      <main class="conteudo" id="conteudo-spa">
+
+        <!-- PÁGINA DASHBOARD -->
+        <section id="dashboard" class="pagina pagina-ativo">
+          <!-- CABEÇALHO -->
+          <header class="header">
+            <h1>Dashboard Financeiro</h1>
+          </header>
+
+          <!-- SALDO ATUAL -->
+          <section class="balanca">
+            <span class="label"><i class="fa-solid fa-wallet"></i> Saldo Atual</span>
+            <h2 data-moeda="brl">0,00</h2>
+            <div class="balanca-info">
+              <span><i class="fas fa-arrow-up"></i><span data-moeda="brl" class="entrada">0</span></span>
+              <span><i class="fas fa-arrow-down"></i> <span data-moeda="brl" class="saida">0</span></span>
+            </div>
+          </section>
+
+          <!-- GRID DE CONTEÚDO -->
+          <section class="grid">
+            <!-- GRÁFICO DE GASTOS -->
+            <div class="card grande">
+              <h3>Gastos por Categoria</h3>
+              <div class="placeholder">
+                <canvas class="myChart"></canvas>
+              </div>
+            </div>
+
+            <!-- CARDS DE RESUMO -->
+            <div class="sumario">
+              <div class="sumario-card verde">
+                <strong><i class="fas fa-arrow-up"></i> Entradas</strong>
+                <h4 data-moeda="brl" class="entrada">0</h4>
+              </div>
+
+              <div class="sumario-card vermelho">
+                <strong><i class="fas fa-arrow-down"></i> Saídas</strong>
+                <h4 data-moeda="brl" class="saida">0</h4>
+              </div>
+
+              <div class="sumario-card amarelo">
+                <strong><i class="fas fa-money-bill-wave"></i> Maior Gasto</strong>
+                <h4 class="maiorGastoCategoria">Categoria</h4>
+                <small data-moeda="brl" class="maiorGasto">0</small>
+              </div>
+            </div>
+
+            <!-- TRANSAÇÕES RECENTES -->
+            <div class="card full">
+              <h3>Transações Recentes</h3>
+              <ul class="lista-transacoes"></ul>
+            </div>
+          </section>
+        </section>
+
+        <!-- PÁGINA TRANSAÇÕES -->
+        <section id="transacoes" class="pagina">
+          <header class="header">
+            <h1>Histórico de Transações</h1>
+            <div class="mes-select">
+              <i class="fas fa-calendar"></i>
+              <select name="datas" class="datas">
+                <!-- GERADOS DINÂMICAMENTE-->
+              </select>
+            </div>
+          </header>
+          <section class="card full">
+            <ul class="historico-transacoes"></ul>
+          </section>
+        </section>
+
+        <!-- PÁGINA CONFIGURAÇÕES -->
+        <section id="configuracoes" class="pagina">
+          <header class="header">
+            <h1>Configurações</h1>
+          </header>
+
+          <section class="configs">
+
+            <!-- TAMANHO DA FONTE -->
+            <div class="config-item">
+              <label for="tamanhoFonte">Tamanho das fontes:</label>
+              <input
+                id="tamanhoFonte"
+                class="tamanhoDaFonte"
+                type="number"
+                placeholder="Padrão: 20"
+              />
+            </div>
+
+            <!-- MOEDA -->
+            <div class="config-item moeda-select">
+              <label for="moedas">Tipo de moeda:</label>
+              <select id="moedas" name="moedas" class="moedas">
+                <option value="BRL">Reais (R$)</option>
+                <option value="USD">Dólares ($)</option>
+              </select>
+            </div>
+
+          </section>
+        </section>
+
+       
+      </main>
+    </div>
+
+    <!-- BOTÃO FLUTUANTE -->
+    <button class="botao" onclick="abrirFecharModal()">+</button>
+
+    <!-- MODAL DE NOVA TRANSAÇÃO -->
+    <form class="modal" id="modal">
+      <div class="conteudo-modal">
+        <h3>Nova Transação</h3>
+
+        <!-- TIPO DE TRANSAÇÃO -->
+        <div class="modal-row">
+          <label class="btn verde">
+            <input type="radio" name="tipo" value="entrada" required />
+            Entrada
+          </label>
+
+          <label class="btn vermelho">
+            <input type="radio" name="tipo" value="saida" />
+            Saída
+          </label>
+        </div>
+
+        <!-- DESCRIÇÃO -->
+        <label for="descricao">Descrição</label>
+        <input id="descricao" type="text" placeholder="Ex: Salário" />
+
+        <!-- CATEGORIA -->
+        <label for="categoria">Categoria</label>
+        <select id="categoria">
+          <option disabled selected>Selecione...</option>
+          <option value="Alimentação">Alimentação</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Moradia">Moradia</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Renda">Renda</option>
+        </select>
+
+        <!-- VALOR -->
+        <label for="valor">Valor</label>
+        <input id="valor" type="number" placeholder="R$ 0,00" />
+
+        <!-- BOTÕES DE AÇÃO -->
+        <div class="acoes-modal">
+          <button type="button" class="btn cinza" onclick="abrirFecharModal()">
+            Cancelar
+          </button>
+          <button type="submit" class="btn azul">Salvar</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="js/localStorageTransacoes.js"></script>
+    <script src="js/registrarTransacao.js"></script>
+    <script src="js/calculosOrcamento.js"></script>
+    <script src="js/renderizarResumo.js"></script>
+    <script src="js/graficoPizzaGastos.js"></script>
+    <script src="js/renderizarTransacoes.js"></script>
+     <script src="js/filtroDataHistorico.js"></script>
+    <script src="js/deletarTransacaoHistorico.js"></script>
+    <script src="js/alternarSecoes.js"></script>
+    <script src="js/configuracoes.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

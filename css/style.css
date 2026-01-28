@@ -1,0 +1,477 @@
+/* RESET E VARIÁVEIS GLOBAIS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f7fa;
+  color: #111827;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* CLASSE DE VISUALIZAÇÃO DE PÁGINAS */
+.pagina {
+  display: none;
+}
+
+.pagina-ativo {
+  display: block;
+}
+
+.menu-item.selecionada {
+  background: #e0e7ff;
+  color: #2563eb;
+}
+
+/* CORES UTILITÁRIAS */
+.verde {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.vermelho {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.azul {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.amarelo {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* GRID HELPERS */
+.grande {
+  grid-column: 1;
+}
+
+.full {
+  grid-column: span 2;
+}
+
+/* CARD PADRÃO */
+.card {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 24px;
+}
+
+.logo {
+  background: #2563eb;
+  color: #ffffff;
+  padding: 16px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 12px;
+  margin-bottom: 32px;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: none;
+  background: none;
+  text-align: left;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #374151;
+}
+
+.menu-item:hover {
+  background: #f1f5f9;
+}
+
+/* CONTEÚDO PRINCIPAL */
+.conteudo {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* PÁGINA DE DASHBOARD*/
+
+/* CABEÇALHO */
+.header {
+  background: #ffffff;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1.2rem;
+}
+
+/* BALANÇA */
+.balanca {
+  margin: 24px;
+  padding: 32px;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #ffffff;
+  border-radius: 16px;
+}
+
+.balanca h2 {
+  font-size: 2rem;
+  margin: 12px 0;
+}
+
+.balanca-info {
+  display: flex;
+  gap: 24px;
+  opacity: 0.9;
+}
+
+/* GRID PRINCIPAL */
+.grid {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+/* PLACEHOLDER DO GRÁFICO */
+.placeholder {
+  height: 250px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  margin-top: 12px;
+}
+
+/* SUMÁRIO */
+.sumario {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sumario-card {
+  padding: 16px;
+  border-radius: 12px;
+  line-height: 1.5;
+}
+
+/* TRANSAÇÕES */
+.lista-transacoes {
+  max-height: 330px;
+  overflow-y: hidden;
+}
+
+.transacao {
+  background: #f1f5f9;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+/* PÁGINA DE HISTÓRICO DE TRANSAÇÕES */
+
+.mes-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5f9;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.mes-select select {
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.botao-excluir {
+  width: 40px;
+  height: 35px;
+  background-color: #94a3b8;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.botao-excluir:hover {
+  filter: brightness(0.9);
+}
+
+/* BOTÃO FLUTUANTE */
+.botao {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.botao:hover {
+  filter: brightness(0.9);
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.conteudo-modal {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  width: 360px;
+}
+
+.conteudo-modal h3 {
+  margin-bottom: 16px;
+}
+
+.conteudo-modal input,
+.conteudo-modal select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.modal-row {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+  text-align: center;
+}
+
+.modal-row input[type="radio"] {
+  display: none;
+}
+
+.modal-row input[type="radio"]:checked + span,
+.modal-row label:has(input:checked) {
+  outline: 2px solid #000;
+  opacity: 1;
+}
+
+.acoes-modal {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  filter: brightness(0.9);
+}
+
+/* PÁGINA CONFIGURAÇÕES */
+
+.configs {
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.configs label {
+  font-size: 1.5rem;
+}
+
+.darkMode {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #000;
+  color: white;
+  border: 0;
+}
+
+.tamanhoDaFonte {
+  width: 100px;
+  height: 30px;
+  outline: 0;
+  padding: 0.5%;
+}
+
+.moedas {
+  width: 100px;
+  height: 30px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 768px) {
+  /* LAYOUT GERAL */
+  .app {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* SIDEBAR -> TOPBAR */
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 16px;
+  }
+
+  .logo {
+    margin-bottom: 16px;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 8px;
+  }
+
+  .menu-item {
+    flex: 1;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .menu-item i {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* CONTEÚDO */
+  .conteudo {
+    overflow-y: visible;
+  }
+
+  /* HEADER */
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* BALANÇA */
+  .balanca {
+    margin: 16px;
+    padding: 24px;
+  }
+
+  .balanca h2 {
+    font-size: 1.6rem;
+  }
+
+  .balanca-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* GRID */
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .grande,
+  .full {
+    grid-column: span 1;
+  }
+
+  /* GRÁFICO */
+  .placeholder {
+    height: 220px;
+  }
+
+  /* SUMÁRIO */
+  .sumario {
+    flex-direction: column;
+  }
+
+  .sumario-card {
+    font-size: 0.95rem;
+  }
+
+  /* LISTAS */
+  .lista-transacoes,
+  .historico-transacoes {
+    max-height: none;
+  }
+
+  .transacao {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* BOTÃO FLUTUANTE */
+  .botao {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  /* MODAL */
+  .conteudo-modal {
+    width: 90%;
+    max-width: 360px;
+  }
+
+  .modal-row {
+    flex-direction: column;
+  }
+
+  /* CONFIGURAÇÕES */
+  .configs {
+    padding: 16px;
+  }
+
+  .configs label {
+    font-size: 1.2rem;
+  }
+
+  .tamanhoDaFonte,
+  .moedas {
+    width: 100%;
+    height: 36px;
+  }
+}
